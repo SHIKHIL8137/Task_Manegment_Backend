@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
 export interface IUserController{
-  test (req: Request, res: Response, next: NextFunction): void;
+  create (req: Request, res: Response, next: NextFunction): void;
+  checkName (req: Request, res: Response, next: NextFunction): void;
 }

@@ -4,6 +4,7 @@ import express, {
   ErrorRequestHandler,
   RequestHandler,
 } from "express";
+import cookieParser from 'cookie-parser'
 import { IDatabase } from "./domain/interface/dbConnect/IDb.interface";
 
 export class App {
@@ -21,6 +22,7 @@ export class App {
   private config() {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cookieParser())
   }
 
   private routes() {

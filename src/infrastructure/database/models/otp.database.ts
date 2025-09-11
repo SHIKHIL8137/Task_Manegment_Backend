@@ -23,7 +23,7 @@ const otpSchema = new Schema<IOtpDocument>({
   }
 })
 
-otpSchema.index({createAt:1},{expireAfterSeconds:600}) //10 minutes
+otpSchema.index({createdAt:1},{expireAfterSeconds:600}) //10 minutes
 
 const OtpModel = mongoose.models.Otp || mongoose.model<IOtpDocument>("Otp",otpSchema);
 export default OtpModel

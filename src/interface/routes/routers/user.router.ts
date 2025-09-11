@@ -11,7 +11,8 @@ export class UserRoute implements IUserRoute{
     }
   
     private  routes(): void {
-      this._router.get("/", this._controller.test);
+      this._router.post("/", this._controller.create);
+      this._router.get("/check-name", this._controller.checkName);
     }
   
     public getRouter(): Router {
