@@ -7,7 +7,7 @@ export class VerifyOtpRequestDto {
 }
 
 export class LoginRequestDto {
-  constructor(public email: string, public password: string) {}
+  constructor(public email: string, public password: string,public role:string) {}
 }
 
 export class RefreshTokenRequestDto {
@@ -15,6 +15,7 @@ export class RefreshTokenRequestDto {
     public userId: string,
     public email: string,
     public name: string,
-    public role?: string
+    public role?: string,
+    public id?:string
   ) {}
 }

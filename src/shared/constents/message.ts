@@ -6,6 +6,7 @@ export const Messages = {
   USER_NAME_EXIST:"User name exist",
   USER_EMAIL_ALREADY_EXISTS:"Email already exist",
   LOGOUT_SUCCESS: "Logged out successfully",
+  ROLE_NOT_MATCHING :"Role not matching",
 
   
 
@@ -33,5 +34,13 @@ export const Messages = {
   // Otp message
   INVALID_OTP:"Invalid or expired OTP",
   OTP_SEND:"OTP Sended your mail please check",
-  OTP_VERIFYED:"OTP Verifyed"
+  OTP_VERIFYED:"OTP Verifyed",
+
+  //upload
+
+  UPLOAD_ERROR:'No file uploaded',
+
+  //Task
+
+  TASK_EXPIRED:"Task expired!"
 };

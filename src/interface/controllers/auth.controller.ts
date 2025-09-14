@@ -56,7 +56,7 @@ export class AuthController implements IAuthController {
           this._statusCode.BAD_REQUEST,
           this._message.FIELD_MISSING
         );
-      const requestDto = new VerifyOtpRequestDto(email, otp);
+      const requestDto = new VerifyOtpRequestDto(email, Number(otp));
       const result = await this._otpUsecase.verifyOtp(requestDto);
       const repsonseDto = new VerifyResponseDto(result);
       res
@@ -72,13 +72,13 @@ export class AuthController implements IAuthController {
   };
   login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { email, password } = req.body;
-      if (!email || !password)
+      const { email, password ,role } = req.body;
+      if (!email || !password || !role)
         throw new ApiError(
           this._statusCode.BAD_REQUEST,
           this._message.FIELD_MISSING
         );
-      const requestDto = new LoginRequestDto(email, password);
+      const requestDto = new LoginRequestDto(email, password,role);
       const result = await this._userUsecase.loginValidation(requestDto);
       if (!result)
         throw new ApiError(
@@ -86,6 +86,7 @@ export class AuthController implements IAuthController {
           this._message.INVALID_CREDENTIALS
         );
       const responseDto = new LoginResponseDto(
+        result.id!,
         result.userId!,
         result.name!,
         result.email!
@@ -116,7 +117,8 @@ export class AuthController implements IAuthController {
         user?.userId!,
         user?.email!,
         user?.name!,
-        user?.role!
+        user?.role!,
+        user?.id!
       );
       const result = await this._userUsecase.refreshTokenValidation(requestDto);
       if (!result)
@@ -129,6 +131,7 @@ export class AuthController implements IAuthController {
         httpOnly: true,
         secure: this._env.node_env === "production",
       });
+      res.status(this._statusCode.OK).json({status:true})
     } catch (error) {
       next(error);
     }

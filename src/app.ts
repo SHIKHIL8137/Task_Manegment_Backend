@@ -10,10 +10,10 @@ import { Messages } from "./shared/constents/message";
 const errorHandler = new ErrorHandler();
 const rateLimit = new RateLimter(Messages)
 const dbConnection = new MongoDBConnection(configEnv.mongoose_string);
-const server = new App(express(), Router, errorHandler.handle,[rateLimit.global]);
+const server = new App(express(), Router, errorHandler.handle,[rateLimit.global],configEnv);
 
 
 (async () => {
   await server.connectDB(dbConnection);
-  server.listen(configEnv.port);
+  server.listen();
 })();

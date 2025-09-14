@@ -7,6 +7,7 @@ export interface JwtPayload {
   role?: string;
   iat?: number;
   exp?: number;
+  id:string;
 }
 
 export interface ITOkenService{

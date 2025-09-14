@@ -6,13 +6,16 @@ import express, {
 } from "express";
 import cookieParser from 'cookie-parser'
 import { IDatabase } from "./domain/interface/dbConnect/IDb.interface";
+import cors from 'cors'
+import { IConfigEnv } from "./domain/interface/types/config.interface";
 
 export class App {
   constructor(
-    private app: Application,
-    private mainRouter: ExpressRouter,
-    private errorHandler: ErrorRequestHandler,
-    private middlewaresList : RequestHandler[] = []
+    private _app: Application,
+    private _mainRouter: ExpressRouter,
+    private _errorHandler: ErrorRequestHandler,
+    private _middlewaresList : RequestHandler[] = [],
+    private _configenv:IConfigEnv
   ) {
     this.config();
     this.routes();
@@ -20,25 +23,29 @@ export class App {
   }
 
   private config() {
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: true }));
-    this.app.use(cookieParser())
+    this._app.use(cors({
+    origin: this._configenv.frontend_url,
+    credentials: true,
+  }))
+    this._app.use(express.json());
+    this._app.use(express.urlencoded({ extended: true }));
+    this._app.use(cookieParser())
   }
 
   private routes() {
-    this.app.use("/api", this.mainRouter);
+    this._app.use("/api", this._mainRouter);
   }
 
   private applyMiddlewares() {
-    this.middlewaresList.forEach(mw => this.app.use(mw))
-    this.app.use(this.errorHandler);
+    this._middlewaresList.forEach(mw => this._app.use(mw))
+    this._app.use(this._errorHandler);
   }
 
   public async connectDB(dbInstance: IDatabase) {
     await dbInstance.connect();
   }
 
-  public listen(port: number) {
-    this.app.listen(port, () => console.log(`Server running on port ${port}`));
+  public listen() {
+    this._app.listen(this._configenv.port, () => console.log(`Server running on port ${this._configenv.port}`));
   }
 }

@@ -12,6 +12,7 @@ export class VerifyResponseDto{
 
 export class LoginResponseDto{
   constructor(
+    public id:string,
     public userId:string,
     public name :string,
     public email:string,

@@ -18,7 +18,7 @@ const submissionSchema = new Schema<ISubmissionDocument>({
     required:true
   },
   documents:{
-    type:[String]
+    type:String
   },
   createdAt:{
     type:Date,
@@ -37,8 +37,11 @@ const submissionSchema = new Schema<ISubmissionDocument>({
   },
   isDeleted:{
     type:Boolean,
-    required :true,
     default : false
+  },
+  isVerified:{
+    type:Boolean,
+    default:false
   }
 })
 

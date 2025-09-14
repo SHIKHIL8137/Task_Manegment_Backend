@@ -26,7 +26,7 @@ export class Authentication implements IAuthentication {
       if (!token)
         throw new ApiError(
           this._statusCode.UNAUTHORIZED,
-          this._message.UNAUTHORIZED
+          this._message.UNAUTHORIZED,
         );
 
       const decode = this._tokenService.verifyAccessToken(token);
@@ -46,14 +46,19 @@ export class Authentication implements IAuthentication {
       if (!token)
         throw new ApiError(
           this._statusCode.UNAUTHORIZED,
-          this._message.UNAUTHORIZED
+          this._message.UNAUTHORIZED,
+          {tokenMissing:true}
         );
 
       const decode = this._tokenService.verifyRefreshToken(token);
       req.user = decode as JwtPayload;
       next();
     } catch (error) {
-      next(error);
+      throw new ApiError(
+          this._statusCode.UNAUTHORIZED,
+          this._message.UNAUTHORIZED,
+          {invalidToken:true}
+        );
     }
   };
 }

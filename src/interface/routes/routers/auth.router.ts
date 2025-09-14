@@ -17,7 +17,7 @@ export class AuthRoute implements IAuthRoute {
     this._router.post("/otp-verify", this._controller.verifyOtp);
     this._router.post("/login",this._controller.login)
     this._router.post("/refresh-token",this._authGurd.refreshTokenhandler,this._controller.refreshToken)
-     this._router.post("/logout",this._controller.logout)
+     this._router.get("/logout",this._controller.logout)
   }
 
   public getRouter(): Router {

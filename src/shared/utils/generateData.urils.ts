@@ -18,4 +18,17 @@ export class GenerateData implements IGenerateData{
     const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
     return `${prefix}${randomNumber}${randomLetter}`;
   }
+  generateTaskId(): string {
+    const prefix = "TASK";
+    const randomNumber = Math.floor(100 + Math.random() * 900);
+    const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    return `${prefix}${randomNumber}${randomLetter}`;
+  }
+
+   generateSubmissionId(): string {
+    const prefix = "SUB";
+    const randomNumber = Math.floor(100 + Math.random() * 900);
+    const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    return `${prefix}${randomNumber}${randomLetter}`;
+  }
 }

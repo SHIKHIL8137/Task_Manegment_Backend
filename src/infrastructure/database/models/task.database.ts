@@ -22,12 +22,10 @@ const taskSchema = new Schema<ITaskDocument>({
   },
   createdAt:{
     type:Date,
-    required:true,
     default: Date.now,
   },
   updatedAt:{
     type:Date,
-    required:true,
     default: Date.now,
   },
   isDeleted:{
@@ -46,7 +44,7 @@ const taskSchema = new Schema<ITaskDocument>({
   },
   status: {
     type: String,
-    enum: ["pending", "completed"], 
+    enum: ["pending", "completed","expired"], 
     default: "pending",
     required: true,
   },

@@ -11,11 +11,12 @@ export interface ISubmission{
   submissionId :string
   taskId : Types.ObjectId
   description:string
-  documents:string[]
+  documents:string
   createdAt :Date
   updatedAt :Date
   isDeleted : boolean
-  userId : Types.ObjectId
+  userId : Types.ObjectId,
+  isVerified:boolean
 }
 
 export interface ITask{
@@ -41,4 +42,21 @@ export interface IUser{
   createdAt :Date
   updatedAt :Date
   isDeleted : boolean
+}
+
+export interface FindAllOptions {
+  filter?: Partial<IUser>;
+  skip?: number;
+  limit?: number;
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
+}
+
+export interface FindAllOption {
+  filter?: Partial<Record<keyof ITask, string | boolean | Date>>;
+  search?: string;
+  skip?: number;
+  limit?: number;
+  sortBy?: keyof ITask;
+  sortOrder?: "asc" | "desc";
 }

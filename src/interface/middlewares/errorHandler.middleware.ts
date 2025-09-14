@@ -11,11 +11,10 @@ export class ErrorHandler {
     next: NextFunction 
   ): void => {
     if (err instanceof ApiError) {
-      res.status(err.status).json({status:false, message: err.message });
-    } else {
-    
+      res.status(err.status).json({status:false, message: err.message,meta:err.meta });
+    } else {   
       console.log(err)
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status:true, message: Messages.SERVER_ERROR });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({status:false, message: Messages.SERVER_ERROR });
     }
   };
 }
